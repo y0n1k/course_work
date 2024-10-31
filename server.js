@@ -11,7 +11,29 @@ app.use(bodyParser.json());
 
 // app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+// app.get('/', (req, res) => {
+//    res.sendFile(`${__dirname}/index.html`)
+//    console.log('Successful');
+//    // res.send('Successful')
+// })
+
 app.get('/', (req, res) => {
+   res.redirect('/index.html');
+   console.log('Redirected to index.html');
+});
+
+// app.get('/search.html', (req, res) => {
+//    res.redirect('/search.html');
+//    console.log('Redirected to search.html');
+// });
+
+app.get('/login.html', (req, res) => {
+   res.sendFile(`${__dirname}/login.html`)
+   console.log('Successful');
+   // res.send('Successful')
+})
+
+app.get('/index.html', (req, res) => {
    res.sendFile(`${__dirname}/index.html`)
    console.log('Successful');
    // res.send('Successful')

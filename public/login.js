@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,7 +18,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  const signup = document.getElementById('signup');
+  const signup = document.getElementById('login');
 
   signup.addEventListener("click", function(event){
     event.preventDefault();
@@ -31,11 +31,11 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       alert("Please fill in both email and password fields.");
       return;
   }
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    alert('Creating an account');
+    alert('Loging in...');
     window.location.href= 'public/search.html';
     // ...
   })
