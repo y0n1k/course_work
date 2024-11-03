@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -31,19 +31,35 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
       alert("Please fill in both email and password fields.");
       return;
   }
-    createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed up 
+
+  setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  })
+  .then((userCredential)=>{
     const user = userCredential.user;
-    alert('Creating an account');
-    window.location.href= 'public/search.html';
-    // ...
+      alert('Account created successfully!');
+      window.location.href = 'search.html';
   })
-  .catch((error) => {
+  .catch((error)=>{
     const errorCode = error.code;
-    const errorMessage = error.message;
-    alert(`Error: ${errorMessage}`);
-    // ..
-  });
-  console.log('Hola!')
+      const errorMessage = error.message;
+      alert(`Error: ${errorMessage}`);
   })
+})
+  //   createUserWithEmailAndPassword(auth, email, password)
+  // .then((userCredential) => {
+  //   // Signed up 
+  //   const user = userCredential.user;
+  //   alert('Creating an account');
+  //   window.location.href= 'search.html';
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   alert(`Error: ${errorMessage}`);
+  //   // ..
+  // });
+  // console.log('Hola!')
+  // })
