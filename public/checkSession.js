@@ -17,7 +17,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in
     console.log("User is logged in:", user.email);
     let userEmail = document.getElementById('user-email');
-    userEmail.innerText = `Hello, ${user.email}!`;
+    userEmail.innerText = user.email;
     // Here you can load the user's favorite movies or any other personalized data
   } else {
     // No user is signed in, redirect to login page

@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBHC60Q0MVMl5hcjagFPfWOkYviGPG89HU",
     authDomain: "login-test-cf786.firebaseapp.com",
@@ -12,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const database = getDatabase(app);
 
 document.getElementById('logout').addEventListener('click', () => {
     signOut(auth).then(() => {
@@ -66,41 +69,90 @@ document.getElementById('searchButton').addEventListener('click', async () => {
 });
 
 function displayMovieDetails(movie) {
-  // Clear previous movie details
-  const movieDetailsContainer = document.getElementById('movieDetailsContainer');
-  movieDetailsContainer.innerHTML = ""; // Clear previous results
+  return new Promise((resolve, reject) => {
+    const movieDetailsContainer = document.getElementById('movieDetailsContainer');
+    movieDetailsContainer.innerHTML = ""; // Clear previous results
 
-  let movieDetails = document.createElement('div');
-  movieDetails.classList.add('movieDetails');
+    let movieDetails = document.createElement('div');
+    movieDetails.classList.add('movieDetails');
 
-  if (movie.Response === "False") {
+    if (movie.Response === "False") {
       movieDetails.textContent = "Movie not found!";
       movieDetailsContainer.appendChild(movieDetails); // Append to the container
+      resolve(); // Resolve immediately if movie is not found
       return;
+    }
+
+    // Create elements for movie details
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = `${movie.Title} (${movie.Year})`;
+
+    const genreElement = document.createElement('p');
+    genreElement.textContent = `Genre: ${movie.Genre}`;
+
+    const plotElement = document.createElement('p');
+    plotElement.textContent = `Plot: ${movie.Plot}`;
+
+    const directorElement = document.createElement('p');
+    directorElement.textContent = `Director: ${movie.Director}`;
+
+    const posterElement = document.createElement('img');
+    posterElement.src = movie.Poster;
+    posterElement.alt = `Poster of ${movie.Title}`;
+
+    const saveButton = document.createElement('button');
+    saveButton.classList.add('greenbutton');
+    saveButton.innerText = 'Зберегти';
+
+    // Attach event listener to saveButton to call save with the movie data
+    saveButton.addEventListener('click', async () => {
+      await save(movie); // Pass the movie data to save
+    });
+
+    // Append elements to the movieDetails container
+    movieDetails.appendChild(titleElement);
+    movieDetails.appendChild(genreElement);
+    movieDetails.appendChild(plotElement);
+    movieDetails.appendChild(directorElement);
+    movieDetails.appendChild(posterElement);
+    movieDetails.appendChild(saveButton);
+    movieDetailsContainer.appendChild(movieDetails); // Append to the movieDetailsContainer
+
+    resolve(); // Resolve when details have been added to the DOM
+  });
+}
+
+async function save(movie) {
+  const user = auth.currentUser; // Assuming user is logged in
+  if (user) {
+  const userId = user.uid;
+  const movieRef = ref(database, `users/${userId}/movies/${movie.Title}`);
+  try {
+    // Check if the movie already exists
+    const snapshot = await get(movieRef);
+
+    if (snapshot.exists()) {
+      alert("You have already saved it!");
+    } else {
+      // Movie does not exist, so save it
+      await set(movieRef, {
+        title: movie.Title,
+        year: movie.Year,
+        genre: movie.Genre,
+        plot: movie.Plot,
+        director: movie.Director,
+        poster: movie.Poster
+      });
+
+      alert('Movie details saved to favorites!');
+      console.log('Movie saved successfully');
+    }
+  } catch (error) {
+    console.error("Error checking or saving movie data:", error);
+    alert('Failed to save movie details.');
   }
-
-  // Create elements for movie details
-  const titleElement = document.createElement('h2');
-  titleElement.textContent = `${movie.Title} (${movie.Year})`;
-
-  const genreElement = document.createElement('p');
-  genreElement.textContent = `Genre: ${movie.Genre}`;
-
-  const plotElement = document.createElement('p');
-  plotElement.textContent = `Plot: ${movie.Plot}`;
-
-  const directorElement = document.createElement('p');
-  directorElement.textContent = `Director: ${movie.Director}`;
-
-  const posterElement = document.createElement('img');
-  posterElement.src = movie.Poster;
-  posterElement.alt = `Poster of ${movie.Title}`;
-
-  // Append elements to the movieDetails container
-  movieDetails.appendChild(titleElement);
-  movieDetails.appendChild(genreElement);
-  movieDetails.appendChild(plotElement);
-  movieDetails.appendChild(directorElement);
-  movieDetails.appendChild(posterElement);
-  movieDetailsContainer.appendChild(movieDetails); // Append to the movieDetailsContainer
+}
+  else {
+    alert("User is not logged in!");
+  }
 }

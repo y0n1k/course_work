@@ -14,10 +14,15 @@
         <script type="module" src="checkSession.js" defer></script>
         <script type="module" src="search.js"></script>
     </head>
-    <body>
+    <body id="bodySearch">
         <header>
-            <div id="user-email"></div>
-            <button id="logout">Exit account</button>
+            <div id="logoAndCategories">
+                <a id="logo" href="search.html">Moviegation</a>
+            </div>
+            <div id="accountAndExit">
+                <div id="user-email"></div>
+                <button id="logout">Exit account</button>
+            </div>
         </header>
         <div class="search">
             <h1>Введіть назву фільму</h1>
@@ -26,4 +31,5 @@
         </div>
         <div id="movieDetailsContainer"></div> <!-- Container for movie details -->    
     </body>
+    <!-- <script type="module" src="database.js"></script> -->
 </html>
