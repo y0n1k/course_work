@@ -47,20 +47,3 @@ import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersis
       alert(`Error: ${errorMessage}`);
   })
 })
-  //   signInWithEmailAndPassword(auth, email, password)
-  // .then((userCredential) => {
-  //   // Signed up 
-  //   const user = userCredential.user;
-  //   alert('Loging in...');
-  //   window.location.href= 'search.html';
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   alert(`Error: ${errorMessage}`);
-  //   // ..
-  // });
-  // console.log('Hola!')
-  // })
-

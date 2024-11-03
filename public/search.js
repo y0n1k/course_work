@@ -28,14 +28,14 @@ document.getElementById('logout').addEventListener('click', () => {
   document.getElementById('searchButton').addEventListener('click', async () => {
     const title = document.getElementById('movieTitle').value.trim();
     if (!title) {
-        alert("Please enter a movie title");
+        alert("Введіть назву фільму");
         return;
     }
 
     try {
         const response = await fetch(`/movies/title/${encodeURIComponent(title)}`);
         if (!response.ok) {
-            throw new Error("Movie not found or error fetching movie data");
+            throw new Error("Не вийшло отримати дані про фільм");
         }
         
         const movie = await response.json();
@@ -43,29 +43,8 @@ document.getElementById('logout').addEventListener('click', () => {
     } catch (error) {
         console.error(error);
         const movieDetails = document.getElementById('movieDetails');
-        movieDetails.textContent = "Error fetching movie data. Please try again.";
+        movieDetails.textContent = "Не вийшло отримати дані про фільм";
     }
-});
-
-document.getElementById('searchButton').addEventListener('click', async () => {
-  const title = document.getElementById('movieTitle').value.trim();
-  if (!title) {
-      alert("Please enter a movie title");
-      return;
-  }
-
-  try {
-      const response = await fetch(`/movies/title/${encodeURIComponent(title)}`);
-      if (!response.ok) {
-          throw new Error("Movie not found or error fetching movie data");
-      }
-      
-      const movie = await response.json();
-      displayMovieDetails(movie);
-  } catch (error) {
-      console.error(error);
-      displayError("Error fetching movie data. Please try again.");
-  }
 });
 
 function displayMovieDetails(movie) {
@@ -77,7 +56,7 @@ function displayMovieDetails(movie) {
     movieDetails.classList.add('movieDetails');
 
     if (movie.Response === "False") {
-      movieDetails.textContent = "Movie not found!";
+      movieDetails.textContent = "Фільм не знайдено :(";
       movieDetailsContainer.appendChild(movieDetails); // Append to the container
       resolve(); // Resolve immediately if movie is not found
       return;
@@ -110,11 +89,11 @@ function displayMovieDetails(movie) {
     });
 
     // Append elements to the movieDetails container
+    movieDetails.appendChild(posterElement);
     movieDetails.appendChild(titleElement);
     movieDetails.appendChild(genreElement);
     movieDetails.appendChild(plotElement);
     movieDetails.appendChild(directorElement);
-    movieDetails.appendChild(posterElement);
     movieDetails.appendChild(saveButton);
     movieDetailsContainer.appendChild(movieDetails); // Append to the movieDetailsContainer
 
@@ -132,7 +111,7 @@ async function save(movie) {
     const snapshot = await get(movieRef);
 
     if (snapshot.exists()) {
-      alert("You have already saved it!");
+      alert("Ви вже зберегли цей фільм");
     } else {
       // Movie does not exist, so save it
       await set(movieRef, {
@@ -144,15 +123,15 @@ async function save(movie) {
         poster: movie.Poster
       });
 
-      alert('Movie details saved to favorites!');
+      alert('Фільм збережено до Вашого списку!');
       console.log('Movie saved successfully');
     }
   } catch (error) {
     console.error("Error checking or saving movie data:", error);
-    alert('Failed to save movie details.');
+    alert('Не вийшло');
   }
 }
   else {
-    alert("User is not logged in!");
+    alert("Ви не ввійшли в акаунт");
   }
 }

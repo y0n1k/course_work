@@ -203,11 +203,11 @@ color: #000000;
 
 #movieDetailsContainer {
     display: flex;
-    flex-direction: column; /* Stack movie details vertically */
-    align-items: center; /* Center align items in movie details */
-    width: 100%; /* Full width */
-    padding: 20px; /* Padding around movie details */
-    margin-top: 20px; /* Adds space below the search section */
+    flex-direction: column;
+    align-items: center;
+    width: 84.375vw;
+    padding: 20px;
+    margin-top: 20px;
 }
 
 .movieDetails {
@@ -216,12 +216,12 @@ color: #000000;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    gap: 15px;
+    gap: 30px;
     width: 100%;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
-    margin-top: 20px; /* Adds space below each movie detail */
+    /* margin-top: 20px; */
 }
 
 #accountAndExit {
@@ -261,4 +261,31 @@ transition: 0.3s;
 
 #logout:hover{
     background-color: #F0F0F0;
+}
+
+.movieDetails h2 {
+font-family: 'Montserrat';
+font-weight: 700;
+font-size: 36px;
+text-align: center;
+
+color: #000000;
+}
+
+.movieDetails img {
+    width: 272px;
+}
+
+.movieDetails p {
+width: 66.25vw;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+text-align: center;
+color: #000000;
+}
+
+.movieDetails button {
+    width: 15.432vw;
 }
