@@ -11,17 +11,17 @@ const getMovieByTitle = async (title) => {
    }
 };
 
-const getMovieById = async (id) => {
-   try {
-      const response = await axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`);
-      return response.data;
-   } catch (error) {
-      console.error("Error fetching movie data:", error);
-      throw error;
-   }
-};
+// const getMovieById = async (id) => {
+//    try {
+//       const response = await axios.get(`http://www.omdbapi.com/?apikey=${API_KEY}&i=${id}`);
+//       return response.data;
+//    } catch (error) {
+//       console.error("Error fetching movie data:", error);
+//       throw error;
+//    }
+// };
 
 module.exports = {
-   getMovieByTitle,
-   getMovieById
+   getMovieByTitle
+   // getMovieById
 };

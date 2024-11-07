@@ -38,16 +38,16 @@ app.get('/movies/title/:title', async (req, res) => {
    }
 });
 
-// Маршрут для отримання фільму за ID
-app.get('/movies/id/:id', async (req, res) => {
-   const { id } = req.params;
-   try {
-      const movie = await omdbDB.getMovieById(id);
-      res.json(movie);
-   } catch (error) {
-      res.status(500).send("Error fetching movie data");
-   }
-});
+// // Маршрут для отримання фільму за ID
+// app.get('/movies/id/:id', async (req, res) => {
+//    const { id } = req.params;
+//    try {
+//       const movie = await omdbDB.getMovieById(id);
+//       res.json(movie);
+//    } catch (error) {
+//       res.status(500).send("Error fetching movie data");
+//    }
+// });
 
 // Запуск сервера
 app.listen(PORT, host, () => {

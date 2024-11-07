@@ -14,7 +14,6 @@ import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersis
     appId: "1:698107167088:web:90d55281d92465e76d8fb5"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
@@ -23,9 +22,6 @@ import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersis
   signup.addEventListener("click", function(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
-    // const name = document.getElementById('full_name').value;
-    // const favourite_song = document.getElementById('favourite_song').value;
-    // const milk_before_cereal = document.getElementById('milk_before_cereal').value;
     const password = document.getElementById('password').value
     if (!email || !password) {
       alert("Please fill in both email and password fields.");

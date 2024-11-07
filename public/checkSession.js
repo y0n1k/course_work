@@ -14,13 +14,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in
     console.log("User is logged in:", user.email);
     let userEmail = document.getElementById('user-email');
     userEmail.innerText = user.email;
-    // Here you can load the user's favorite movies or any other personalized data
   } else {
-    // No user is signed in, redirect to login page
     window.location.href = 'login.html';
   }
 });

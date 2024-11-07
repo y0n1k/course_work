@@ -14,7 +14,6 @@ import { getAuth, createUserWithEmailAndPassword, setPersistence, browserLocalPe
     appId: "1:698107167088:web:90d55281d92465e76d8fb5"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
@@ -23,9 +22,6 @@ import { getAuth, createUserWithEmailAndPassword, setPersistence, browserLocalPe
   signup.addEventListener("click", function(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
-    // const name = document.getElementById('full_name').value;
-    // const favourite_song = document.getElementById('favourite_song').value;
-    // const milk_before_cereal = document.getElementById('milk_before_cereal').value;
     const password = document.getElementById('password').value
     if (!email || !password) {
       alert("Please fill in both email and password fields.");
@@ -47,19 +43,3 @@ import { getAuth, createUserWithEmailAndPassword, setPersistence, browserLocalPe
       alert(`Error: ${errorMessage}`);
   })
 })
-  //   createUserWithEmailAndPassword(auth, email, password)
-  // .then((userCredential) => {
-  //   // Signed up 
-  //   const user = userCredential.user;
-  //   alert('Creating an account');
-  //   window.location.href= 'search.html';
-  //   // ...
-  // })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   alert(`Error: ${errorMessage}`);
-  //   // ..
-  // });
-  // console.log('Hola!')
-  // })

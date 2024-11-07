@@ -5,15 +5,16 @@
     align-items: center;
 }
 
-#bodySearch {
+#bodyMain {
     width: 100vw;
     min-height: 100vh; /* Allows scrolling when content exceeds the viewport */
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    justify-content: space-between; /* Align items at the top */
+    justify-content: start; /* Align items at the top */
     align-items: center; /* Center align items horizontally */
     overflow-y: auto; /* Enable vertical scrolling for the page */
     overflow-x: hidden;
+    gap: 120px;
 }
 
 #logo{
@@ -192,7 +193,7 @@ height: 75px;
     width: 25%;
 }
 
-.search>h1{
+h1{
 font-family: 'Montserrat';
 font-style: normal;
 font-weight: 500;
@@ -288,4 +289,49 @@ color: #000000;
 
 .movieDetails button {
     width: 15.432vw;
+}
+
+.category {
+text-decoration: none;
+font-family: 'Montserrat';
+font-weight: 500;
+font-size: 24px;
+text-align: center;
+color: #FFFFFF;
+}
+#logoAndCategories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.movie-div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 201px;
+    gap: 15px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+text-align: center;
+color: #000000;
+}
+.movie-div img{
+    width: 201px;
+    height: 289px;
+}
+.big-div {
+    width: 100vw;
+    padding: 0 150px;
+    display: flex;
+    gap: 30px;
+}
+#savedDivs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 120px;
 }
